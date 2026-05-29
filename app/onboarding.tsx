@@ -1,7 +1,10 @@
-import { View, StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
+import { StatusBar } from "expo-status-bar";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
+import { PlantlyButton } from "@/components/PlantlyButton";
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -13,9 +16,15 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Button title="Let me in" onPress={handlePress} />
-    </View>
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      colors={[theme.colorGreen, theme.colorAppleGreen, theme.colorLimeGreen]}
+      style={styles.container}
+    >
+      <StatusBar style="light" />
+      <PlantlyButton title="Let me in" onPress={handlePress} />
+    </LinearGradient>
   );
 }
 
