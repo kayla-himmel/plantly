@@ -1,13 +1,20 @@
 import { View, StyleSheet, Button } from "react-native";
+import { useRouter } from "expo-router";
 import { theme } from "@/theme";
 import { useUserStore } from "@/store/userStore";
 
-export default function ProfileScreen() {
-  const toggleHasOnboarded = useUserStore((store) => store.toggleHasOnboarded);
+export default function OnboardingScreen() {
+  const router = useRouter();
+  const toggleHasOnboarded = useUserStore((state) => state.toggleHasOnboarded);
+
+  const handlePress = () => {
+    toggleHasOnboarded();
+    router.replace("/");
+  };
 
   return (
     <View style={styles.container}>
-      <Button title="Back to onboarding" onPress={toggleHasOnboarded} />
+      <Button title="Let me in" onPress={handlePress} />
     </View>
   );
 }
