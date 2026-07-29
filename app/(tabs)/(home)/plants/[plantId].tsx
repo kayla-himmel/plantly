@@ -4,7 +4,7 @@ import { usePlantStore } from "@/store/plantsStore";
 import { differenceInCalendarDays, format } from "date-fns";
 import { PlantlyButton } from "@/components/PlantlyButton";
 import { theme } from "@/theme";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PlantlyImage } from "@/components/PlantlyImage";
 
 const fullDateFormat = "LLL d yyyy, h:mm aaa";
@@ -19,6 +19,7 @@ export default function PlantDetails() {
     state.plants.find((plant) => String(plant.id) === plantId),
   );
   const navigation = useNavigation();
+  const [now] = useState(() => Date.now());
 
   useEffect(() => {
     navigation.setOptions({
@@ -80,7 +81,7 @@ export default function PlantDetails() {
         <Text style={styles.key}>Days since last watered</Text>
         <Text style={styles.value}>
           {plant.lastWateredAtTimestamp
-            ? differenceInCalendarDays(Date.now(), plant.lastWateredAtTimestamp)
+            ? differenceInCalendarDays(now, plant.lastWateredAtTimestamp)
             : "N/A"}
         </Text>
       </View>
